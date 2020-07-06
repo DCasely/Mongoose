@@ -33,16 +33,39 @@ const fruit = new Fruit({
 const personsSchema = new mongoose.Schema({
   name: String,
   age: Number,
+  favoriteFruit: fruitsSchema,
 });
 
 const Person = mongoose.model('Person', personsSchema);
 
-const person = new Person({
-  name: 'John',
-  age: 37,
+const pineapple = new Fruit({
+  name: 'Pineapple',
+  score: 9,
+  review: 'Great fruit',
 });
 
-person.save();
+const plantains = new Fruit({
+  name: 'Plantains',
+  score: 10,
+  review: 'Plantains are AWESOME',
+});
+
+plantains.save();
+
+// const person = new Person({
+//   name: 'John',
+//   age: 37,
+// });
+
+const person = new Person({
+  name: 'Amy',
+  age: 12,
+  favoriteFruit: pineapple,
+});
+
+pineapple.save();
+
+// person.save();
 
 // const kiwi = new Fruit({
 //   name: 'Kiwi',
@@ -82,8 +105,12 @@ person.save();
 //   err ? console.log(err) : console.log(persons);
 // });
 
-Fruit.find((err, fruits) => {
-  err ? console.log(err) : console.log(fruits.map((fruit) => fruit.name));
+// Fruit.find((err, fruits) => {
+//   err ? console.log(err) : console.log(fruits.map((fruit) => fruit.name));
+// });
+
+Person.find((err, person) => {
+  err ? console.log(err) : console.log(person);
 });
 
 // Fruit.updateOne(
@@ -98,10 +125,14 @@ Fruit.find((err, fruits) => {
 //   }
 // );
 
+// Person.updateOne({ name: 'John' }, { favoriteFruit: plantains }, (err) => {
+//   err ? console.log(err) : console.log('Plantains added to John');
+// });
+
 // Fruit.deleteOne({ name: 'Peach' }, (err) => {
 //   err ? console.log(err) : console.log('Deleted Successfully');
 // });
 
-Person.deleteMany({ name: 'John' }, (err) => {
-  err ? console.log(err) : console.log('All Johns DELETED');
-});
+// Person.deleteMany({ name: 'John' }, (err) => {
+//   err ? console.log(err) : console.log('All Johns DELETED');
+// });
