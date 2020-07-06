@@ -23,11 +23,12 @@ const fruitsSchema = new mongoose.Schema({
 const Fruit = mongoose.model('Fruit', fruitsSchema);
 
 const fruit = new Fruit({
+  name: 'Peach',
   rating: 10,
   review: 'Peaches are great.',
 });
 
-fruit.save();
+// fruit.save();
 
 const personsSchema = new mongoose.Schema({
   name: String,
@@ -41,7 +42,7 @@ const person = new Person({
   age: 37,
 });
 
-// person.save();
+person.save();
 
 // const kiwi = new Fruit({
 //   name: 'Kiwi',
@@ -83,4 +84,24 @@ const person = new Person({
 
 Fruit.find((err, fruits) => {
   err ? console.log(err) : console.log(fruits.map((fruit) => fruit.name));
+});
+
+// Fruit.updateOne(
+//   { _id: '5f0355d30d677a349bf6026b' },
+//   { review: 'Steaks are better than Fruits' },
+//   (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log('UPDATE SUCCESSFUL');
+//     }
+//   }
+// );
+
+// Fruit.deleteOne({ name: 'Peach' }, (err) => {
+//   err ? console.log(err) : console.log('Deleted Successfully');
+// });
+
+Person.deleteMany({ name: 'John' }, (err) => {
+  err ? console.log(err) : console.log('All Johns DELETED');
 });
